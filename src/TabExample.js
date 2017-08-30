@@ -61,7 +61,7 @@ class Tabs extends React.Component {
             } else if (child.type === TabList) {
                 return React.cloneElement(child, {
                     activeIndex: this.state.activeIndex,
-                    onActivate: (activeIndex) => this.setState({ activeIndex })
+                    onActivate: (activeIndex) => this.setState({activeIndex})
                 })
             } else {
                 return child
@@ -73,7 +73,7 @@ class Tabs extends React.Component {
 }
 
 export default class TabExample extends React.Component {
-    render () {
+    render() {
         return (
             <div>
                 <Tabs>
