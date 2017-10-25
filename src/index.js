@@ -11,15 +11,20 @@ import React from 'react';
 import { render } from 'react-dom';
 import { compose, map, prop, curry, reduce, pipe } from 'ramda';
 
-const combine = curry((c, o) => x => (
+const combine = curry((c, o) => x =>
+{
+   console.log('combine', c, 'o', o, 'x', x);
+    return (
   <div>
     {c(x)} {o(x)}
   </div>
-));
+)});
 
 const combineComponents = (...args) => {
   const [first, ...rest] = args;
-  return reduce((acc, c) => combine(acc, c), first, rest);
+  return reduce((acc, c) => {
+      console.log('reduce acc: ', acc, 'c: ', c);
+      return combine(acc, c); }, first, rest);
 };
 
 const state = {
@@ -40,4 +45,4 @@ const TodoList = pipe(getTodos, compose(List, map(Item)));
 const TodoFooter = pipe(s => s.year, Footer);
 
 const App = combineComponents(TodoList, TodoHeader, TodoFooter);
-const result = render(<App {...state} />, document.getElementById('root'));
+render(<App {...state} />, document.getElementById('root'));
